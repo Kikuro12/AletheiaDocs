@@ -1,0 +1,31 @@
+<% layout('layout') %>
+<article class="post">
+	<h2><%= post.title %></h2>
+	<div class="meta">ni <%= post.username || 'Anon' %> • <%= new Date(post.created_at).toLocaleString('fil-PH') %></div>
+	<div class="body"><%= post.body %></div>
+	<% if (currentUser && currentUser.is_admin) { %>
+		<form class="inline" method="post" action="/forum/<%= post.id %>/lock"><button>I-lock</button></form>
+		<form class="inline" method="post" action="/forum/<%= post.id %>/pin"><button>I-pin</button></form>
+	<% } %>
+</article>
+
+<section class="replies">
+	<h3>Mga Sagot</h3>
+	<ul>
+		<% replies.forEach(r => { %>
+			<li class="reply">
+				<div><strong><%= r.username || 'Anon' %></strong> • <%= new Date(r.created_at).toLocaleString('fil-PH') %></div>
+				<div><%= r.is_deleted ? '<em>Deleted</em>' : r.body %></div>
+				<% if (currentUser && currentUser.is_admin && !r.is_deleted) { %>
+					<form class="inline" method="post" action="/admin/forum/replies/<%= r.id %>/delete"><button>Delete</button></form>
+				<% } %>
+			</li>
+		<% }) %>
+	</ul>
+	<% if (currentUser && !post.is_locked) { %>
+		<form method="post" action="/forum/<%= post.id %>/replies" class="form">
+			<label>Sagot <textarea name="body" rows="4" required></textarea></label>
+			<button>Ipadala</button>
+		</form>
+	<% } %>
+</section>

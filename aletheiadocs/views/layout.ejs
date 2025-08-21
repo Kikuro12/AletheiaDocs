@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title %> · AletheiaDocs</title>
+	<link rel="stylesheet" href="/public/css/style.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+	<script src="/socket.io/socket.io.js" defer></script>
+	<script src="/public/js/app.js" defer></script>
+</head>
+<body>
+	<header class="navbar">
+		<a class="brand" href="/">AletheiaDocs</a>
+		<nav>
+			<a href="/documents">Dokumento</a>
+			<a href="/forum">Talakayan</a>
+			<a href="#" onclick="document.getElementById('open-map').scrollIntoView({behavior:'smooth'})">Mapa</a>
+			<a href="#weather">Panahon</a>
+			<% if (currentUser) { %>
+				<span class="welcome">Mabuhay, <%= currentUser.username %></span>
+				<form class="inline" method="post" action="/auth/logout"><button>Logout</button></form>
+				<% if (currentUser.is_admin) { %><a href="/admin">Admin</a><% } %>
+			<% } else { %>
+				<a href="/auth/login">Login</a>
+				<a href="/auth/register">Register</a>
+			<% } %>
+		</nav>
+	</header>
+
+	<main>
+		<%- body %>
+	</main>
+
+	<div class="chatbox" id="chatbox">
+		<div class="chat-header">Kuwentuhan</div>
+		<div class="chat-messages" id="chat-messages"></div>
+		<form id="chat-form">
+			<input type="text" id="chat-input" placeholder="Magpadala ng mensahe..." />
+		</form>
+	</div>
+
+	<footer class="footer">
+		<div>
+			<span>© <%= new Date().getFullYear() %> AletheiaDocs</span>
+			<span class="credit">Created by Marwen Deiparine</span>
+		</div>
+	</footer>
+</body>
+</html>

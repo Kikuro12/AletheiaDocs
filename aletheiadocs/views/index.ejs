@@ -1,0 +1,40 @@
+<% layout('layout') %>
+<section class="hero">
+	<div class="hero-content">
+		<h1>Maligayang pagdating sa AletheiaDocs</h1>
+		<p>Mga dokumento, kasangkapan, at talakayan para sa bawat Pilipino.</p>
+		<form action="/documents" method="get" class="search-bar">
+			<input type="text" name="q" placeholder="Hanapin ang dokumento..." />
+			<button>Hanapin</button>
+		</form>
+	</div>
+</section>
+
+<section class="announcements">
+	<h2>Mga Anunsyo</h2>
+	<div class="cards">
+		<% announcements.forEach(a => { %>
+			<article class="card">
+				<div class="icon"><%= a.icon || '📄' %></div>
+				<h3><%= a.title %></h3>
+				<p><%= a.body %></p>
+				<small><%= new Date(a.created_at).toLocaleDateString('fil-PH') %></small>
+			</article>
+		<% }) %>
+	</div>
+</section>
+
+<section id="open-map" class="map-weather">
+	<div class="map-wrap">
+		<h2>Mapa ng Pilipinas</h2>
+		<div id="ph-map" class="map"></div>
+	</div>
+	<div id="weather" class="weather-wrap">
+		<h2>Panahon</h2>
+		<form id="weather-form">
+			<input id="weather-q" placeholder="Hal. Manila, Cebu, Davao" />
+			<button>Kunin</button>
+		</form>
+		<pre id="weather-result" class="weather-result"></pre>
+	</div>
+</section>

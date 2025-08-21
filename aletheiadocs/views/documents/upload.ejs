@@ -1,0 +1,18 @@
+<% layout('layout') %>
+<h2>Mag-upload ng Dokumento</h2>
+<form method="post" enctype="multipart/form-data" action="/documents/admin/upload" class="form">
+	<label>Pamagat <input type="text" name="title" required></label>
+	<label>Deskripsyon <textarea name="description"></textarea></label>
+	<label>Kategorya
+		<select name="category_id">
+			<option value="">Wala</option>
+			<% categories.forEach(c => { %>
+				<option value="<%= c.id %>"><%= c.name %></option>
+			<% }) %>
+		</select>
+	</label>
+	<label>File (PDF)
+		<input type="file" name="file" accept="application/pdf" required />
+	</label>
+	<button>I-upload</button>
+</form>

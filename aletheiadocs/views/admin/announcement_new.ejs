@@ -1,0 +1,8 @@
+<% layout('layout') -%>
+<h2>Bagong Anunsyo</h2>
+<form method="post" action="/admin/announcements" class="form">
+	<label>Pamagat <input type="text" name="title" required></label>
+	<label>Katawan <textarea name="body" rows="5" required></textarea></label>
+	<label>Icon <input type="text" name="icon" placeholder="Hal. ☀️"/></label>
+	<button>I-publish</button>
+</form>

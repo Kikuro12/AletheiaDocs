@@ -1,0 +1,15 @@
+<% layout('layout') %>
+<h2>Talakayan</h2>
+<div class="forum-actions">
+	<% if (currentUser) { %>
+		<a class="btn" href="/forum/new">Bagong Talakayan</a>
+	<% } %>
+</div>
+<ul class="forum-list">
+	<% posts.forEach(p => { %>
+		<li>
+			<a href="/forum/<%= p.id %>"><%= p.is_pinned ? '📌 ' : '' %><%= p.title %></a>
+			<small>ni <%= p.username || 'Anon' %> • <%= new Date(p.created_at).toLocaleString('fil-PH') %></small>
+		</li>
+	<% }) %>
+</ul>
