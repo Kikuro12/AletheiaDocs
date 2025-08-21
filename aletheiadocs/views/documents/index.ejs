@@ -1,0 +1,22 @@
+<% layout('layout') %>
+<h2>Mga Dokumento</h2>
+<form method="get" class="filters">
+	<select name="category" onchange="this.form.submit()">
+		<option value="">Lahat ng Kategorya</option>
+		<% categories.forEach(c => { %>
+			<option value="<%= c.slug %>" <%= c.slug === activeCategory ? 'selected' : '' %>><%= c.name %></option>
+		<% }) %>
+	</select>
+	<input type="text" name="q" value="<%= search %>" placeholder="Hanapin..." />
+	<button>Salain</button>
+</form>
+
+<div class="docs">
+	<% documents.forEach(d => { %>
+		<div class="doc">
+			<div class="doc-title"><%= d.title %></div>
+			<div class="doc-meta"><%= d.category || 'Walang Kategorya' %> • <%= new Date(d.created_at).toLocaleDateString('fil-PH') %></div>
+			<div class="doc-actions"><a href="/documents/<%= d.id %>/download" target="_blank">I-download</a></div>
+		</div>
+	<% }) %>
+</div>

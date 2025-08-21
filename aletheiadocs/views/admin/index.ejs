@@ -1,0 +1,11 @@
+<% layout('layout') -%>
+<h2>Admin Dashboard</h2>
+<section>
+	<h3>Mga Anunsyo</h3>
+	<a class="btn" href="/admin/announcements/new">Bagong Anunsyo</a>
+	<ul>
+		<% announcements.forEach(a => { %>
+			<li><%= a.icon || '📣' %> <strong><%= a.title %></strong> • <%= new Date(a.created_at).toLocaleDateString('fil-PH') %></li>
+		<% }) %>
+	</ul>
+</section>
